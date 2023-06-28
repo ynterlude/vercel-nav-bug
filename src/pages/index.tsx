@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { Item } from "./items/[id]";
-import { items } from "@/global";
+import { Item, items } from "@/global";
 
 interface HomePageProps {
   items: Item[];
