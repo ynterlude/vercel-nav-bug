@@ -1,14 +1,29 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
+import Link from "next/link";
+import { Item } from "./items/[id]";
+import { items } from "@/global";
 
-const inter = Inter({ subsets: ["latin"] });
+interface HomePageProps {
+  items: Item[];
+}
 
-export default function Home() {
+export const getServerSideProps = () => {
+  return {
+    props: {
+      items: items,
+    },
+  };
+};
+
+export default function Home(props: HomePageProps) {
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      Starting point
+    <main className={`flex min-h-screen flex-col items-center`}>
+      <ul>
+        {props.items.map((item) => (
+          <li key={item.id}>
+            <Link href={`/items/${item.id}`}>{item.name}</Link>
+          </li>
+        ))}
+      </ul>
     </main>
   );
 }
